@@ -4,43 +4,157 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>css布局</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            border: 10px solid blue;
+            padding: 10px;
+            margin: 80px;
+            background: red;
+        }
+
+        span {
+            width: 100px;
+        }
+
+        .box1 {
+        width: 100px;
+        height: 100px;
+        margin: 40px auto;
+        background: blue;
+        }
+        .box2 {
+        width: 100px;
+        height: 100px;
+        margin: 40px auto; 
+        background: red;
+        position: relative;
+        left: 50px;
+        }
+        .box3 {
+        width: 30px;
+        height: 30px;
+        background: yellow;
+        position: fixed;
+        right: 50px;
+        bottom: 50px;
+        }
+        .parent {
+        padding: 10px;
+        border:1px solid green;
+        text-align:center;
+        }
+    </style>
 </head>
 <body>
-    <!-- 正常文档流 -->
-    <!-- 指在不对页面进行任何布局控制时，浏览器默认的HTML布局方式。 -->
+    <h1>html盒模型 </h1>
+    <!-- 一个HTML网页都可以看成是由一层一层页面元素堆叠起来的 -->
+    <!-- 一个特定HTML元素的显示，它会被呈现为一个矩形，CSS标准中称之为Box。一个HTML元素占据空间的大小由盒模型决定。 -->
+    <!-- 在盒模型中，标准盒模型：一个盒子由内容、内边距、边框和外边距共同构成，其尺寸也是这四部分的尺寸之和。 -->
+    <!-- 怪异盒模型：box-sizing: border-box，  width包含内边距（padding）和border      -->
+
+    <div class="box">
+        你好
+    </div>
 
 
 
-    <!-- 浮动 -->
+    <h1>正常文档流</h1>
+    <!-- 不写任何CSS代码，HTML文档中的元素是按照出现顺序显示的，从上到下，从左到右。指在不对页面进行任何布局控制时，浏览器默认的HTML布局方式。 -->
+    <!-- HTML中的标签元素分为两种类型:块（block）元素，行内（inline）元素。 -->
+    
+    
+    <!-- 块元素的特点有：
+    每个块元素都从新的一行开始，独占一行
+    元素的高度、宽度、行高以及顶和底边距等属性都可设置
+    默认的高度与父元素的宽度一致，即width默认为100%
+    可以容纳行内元素和其他块元素
+    比如<div>、<p>、<ol>、<ul>、<table>、<form>等元素都是块元素。 -->
 
 
 
-    <!-- 定位 -->
+    <!-- 行内元素具有如下特点：
+    和其他行内元素都在一行上
+    元素的高度、宽度、行高及顶部和底部边距等属性不可设置
+    元素不能设置高度，宽度就是它包含的文字或图片的宽度
+    行内元素只能容纳文本或者其他行内元素
+    比如<a>、<span>、<br>、<em>、<strong>等元素都是行内元素。 -->
+
+
+
+    <!-- 设置元素的显示方式：display属性
+    行内元素与块元素也可以相互转化，在CSS中将行内元素可以通过display: block设置为以块元素的方式显示，我们还可以继续设置该元素的长宽等原本不能设置的属性。
+    同样，我们也可以设置块元素的display属性为display: inline，这样块元素就可以再同一行显示了。
+    对于大部分HTML元素来说，如果设置display:inline，它的高、宽、行高、上下边距就无法设置了。
+    display还有其它取值，除了block和inline,其中另外两种很常见的取值为：
+    none: 隐藏元素；
+    inline-block：以block的方式渲染，以inline的方式放置
+    -->
+
+
+    <span>我是行内元素</span>
+
+
+
+
+    <h1>定位</h1>
     <!-- 把一个元素脱离正常文档流或者改变其在正常文档流中的位置，一般 子绝父相 -->
-    <!-- 相对定位：一个元素设置了position属性的值为relative，那么它偏移的参照位是其自身原先在正常文档流中的位置著作权归作者所有。 -->
-    <!-- 绝对定位：元素的position属性值为absolute可以将其完全脱离正常文档流。其原本占据的空间也会被移除著作权归作者所有。 -->
+    <!-- 相对定位：一个元素设置了position属性的值为relative，那么它偏移的参照位是依然在普通流中，位置是正常位置-->
+    <!-- 但是对于postion: absolute和position: fixed的元素，具有以下特性：
+    该元素往 Z 轴方向上移了一层，元素脱离了普通流，所以不再占据原来那层的空间，还会覆盖下层的元素。如果不想覆盖下层的元素，可以减少z-index的值以达到效果。
+    该元素将变为块级元素，相当于给该元素设置了 display: block;，比如给一个内联元素，如 <span> ，设置 absolute之后发现它可以设置宽高了。
+    如果该元素是块级元素，元素的宽度由原来的 width: 100%（占据一行），变为了 auto。 -->
+    <!-- 绝对定位：元素的position属性值为absolute可以将其完全脱离正常文档流。其原本占据的空间也会被移除-->
     <!-- 固定定位：大多数情况下，position:fixed的元素会相对于视窗定位，并且会脱离正常文档流，同样也不会保留该元素所点点据的空间。 -->
 
+    <div class="parent">
+        <!-- z-index -->
+        <div class="box1"></div>
+        <div class="box2"></div>
+        <div class="box3"></div>
+      </div>
 
 
 
-    <!-- flex布局 -->
+
+
+    <h1>浮动</h1>
+    <!-- 可以让一个元素在页面流中浮起来，不占据原来元素的空间。 -->
+    <!-- float属性的元素具有以下一些特点：
+    浮动元素的下一个兄弟元素会紧贴到该元素之前的非浮动元素之后；如果下一个兄弟元素如果也设置了同一浮动方向，则会紧随该元素之后显示。
+    如果该元素的下一个兄弟元素中有内联元素（通常是文字），则会围绕该元素显示，形成类似"文字围绕图片"的效果。
+    该元素将变为块级元素，相当于给该元素设置了display: block; -->
+
+
+
+    <h1>flex布局</h1>
     <!-- Flex是Flexible Box的缩写，意为'弹性布局'，用来为盒状模型提供最大的灵活性。设为Flex布局以后，子元素的float、clear和vertical-align属性将失效。 -->
     <!-- Flexbox布局是一种用于一维布局而设计的布局方法。一维的意思是你希望内容是按照行或者列来布局。你可以在元素上将display设置为flex值，把该元素为变弹性布局。著作权归作者所有。 -->
+    <!-- 父容器上有六个属性:
+    flex-direction：主轴的方向。
+    flex-wrap：超出父容器子容器的排列样式,换行。
+    flex-flow：flex-direction 属性和 flex-wrap 属性的简写形式。
+    justify-content：子容器在主轴的排列方向。
+    align-items：子容器在交叉轴的排列方向。
+    align-content：多根轴线的对齐方式，只有一根轴线，该属性不起作用 -->
 
 
 
 
-    <!-- 响应式布局 -->
+
+    <h1>网格布局</h1>
+    <!-- CSS Grid布局是一种用来进行二维布局的技术。二维意味着你希望按照行和列来排布你的内容。 -->
+    <!-- 当元素设置了网格布局，column、float、clear、vertical-align属性无效 -->
+    <!-- 可以通过表格线行或者列来定位 grid item -->
+    <!-- display: grid指定一个容器采用网格布局。
+    grid-template-columns属性定义每一列的列宽，grid-template-rows属性定义每一行的行高。
+    grid-row-gap属性设置行与行的间隔（行间距），grid-column-gap属性设置列与列的间隔（列间距）。 -->
+
+
+
+    <h1>响应式布局</h1>
     <!--根据页面尺寸进行适应变化 @media only screen and (max-width: <integer>) -->
-
-
-
-    <!-- 网格布局 -->
-    <!-- CSS Grid布局是一种用来进行二维布局的技术。二维意味着你希望按照行和列来排布你的内容。著作权归作者所有。 -->
-
-
-
 
 
 </body>
