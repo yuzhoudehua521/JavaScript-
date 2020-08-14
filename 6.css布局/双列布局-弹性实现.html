@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>双列布局-弹性实现</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .wrapper {
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+        }
+        .left {
+            width: 200px;
+            background: #faa;
+            height: 500px;
+        }
+        .right {
+            flex: 1;
+            height: 800px;
+            background-color: #aaf;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="left">定宽</div>
+        <div class="right">自适应</div>
+    </div>
+</body>
+</html>

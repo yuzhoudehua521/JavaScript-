@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>三列布局-定位实现</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        .left{
+            background: yellow;
+            width: 200px;
+            height: 300px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .middle{
+            height: 800px;
+            margin: 0 220px;
+            background: red;
+        }
+        .right{
+            height: 300px;
+            width: 200px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="left">左栏</div>
+    <div class="middle">中间栏</div>
+    <div class="right">右栏</div>
+</body>
+</html>

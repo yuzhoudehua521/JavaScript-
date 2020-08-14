@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>三列布局-浮动实现</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        .left{
+            width: 200px;
+            height: 300px; 
+            background: yellow; 
+            float: left;    
+        }
+        .right{
+            width: 150px; 
+            height: 300px; 
+            background: green; 
+            float: right;
+        }
+        .middle{
+            height: 800px; 
+            background: red; 
+            margin-left: 220px; 
+            margin-right: 160px;
+        }
+    </style>
+</head>
+<body>
+    <div class="left">左栏</div>
+    <div class="right">右栏</div>
+    <div class="middle">中间栏</div>
+</body>
+</html>
