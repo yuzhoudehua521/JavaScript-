@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+    </style>
+    <title>日期显示</title>
+</head>
+<body>
+
+    <div id="date">
+        <p id="nowDate"></p>
+    </div>
+
+
+    <script>
+        function $(id) {
+            return typeof id === 'string' ? document.getElementById(id) : null
+        }
+
+        setInterval(nowNumTime,1000)
+
+        function nowNumTime() {
+            const now = new Date()
+            const hour = now.getHours()
+            const minute = now.getMinutes()
+            const second = now.getSeconds()
+            const year = now.getFullYear()
+            const month = now.getMonth()
+            const day = now.getDate()
+            const week = now.getDay()
+
+            const weeks = ['星期天','星期一','星期二','星期三','星期四','星期五','星期六',]
+
+            let temp = '' + (hour > 12 ? hour - 12 : hour)
+            if(hour === 0) { temp = '12' }
+
+            temp = temp + (minute < 10 ? ':0' : ':') + minute
+            temp = temp + (second < 10 ? ':0' : ':') + second
+            temp = temp + ' ' + (hour >= 12 ? 'P.M.' : 'A.M.')
+            temp = `${year}年${month}月${day}日 ${temp} ${weeks[week]}`
+            $('nowDate').innerHTML = temp
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        ul {
+            list-style: none;
+        }
+        #box {
+            width: 1000px;
+            border: 2px solid red;
+            margin: 100px auto;
+            padding: 20px;
+        }
+        #content li {
+            border-bottom: 1px dashed #ccc;
+        }
+        #content li a {
+            float: right;
+        }
+    </style>
+    <title>发表评论</title>
+</head>
+<body>
+
+    <div id="box">
+        <div class="box_top">
+            <textarea id="comment" cols="80" rows="10" placeholder="请输入您的评论"></textarea>
+            <button id="btn">发布</button>
+        </div>
+
+        <ul id="content">
+            
+        </ul>
+    </div>
+
+    <script>
+        function $(id) {
+            return typeof id === 'string' ? document.getElementById(id) : null
+        }
+
+        window.onload = function() {
+
+            $('btn').onclick = function() {
+                const inputContent = $('comment').value
+
+                if(inputContent.length === 0) {
+                    alert('请输入内容')
+                    return
+                }
+
+                const newLi = document.createElement('li')
+
+                newLi.innerHTML = `<li>
+                    ${inputContent}<a href="javaScript:void(0)">删除</a>
+                </li>`
+
+                $('content').insertBefore(newLi,$('content').children[0])
+                $('comment').value = ''
+
+                const detBtn = document.getElementsByTagName('a')
+                for(let i = 0; i < detBtn.length; i++) {
+                    detBtn[i].onclick = function() {
+                        this.parentNode.remove()
+                    }
+                }
+
+            }
+        }
+
+    </script>
+</body>
+</html>

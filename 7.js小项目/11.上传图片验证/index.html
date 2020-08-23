@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+    </style>
+    <title>上传图片验证</title>
+</head>
+<body>
+
+
+        <label for="score">上传图片格式验证：</label>
+        <input type="file" name='' id="imgUpload">
+
+
+    <script>
+        //常见图片格式：jpg,png,gif,jpeg
+
+        window.onload = function() {
+            const imgUpload = document.getElementById('imgUpload')
+
+            //监听图片变化
+            imgUpload.onchange = function() {
+                //获取长传图片路径
+                const path = this.value;
+                // console.log(path)
+                
+                const index = path.lastIndexOf('.');
+                
+                const suffix = path.substr(index);
+
+                const lower_suffix = suffix.toLowerCase();
+                if(lower_suffix === '.jpg' || lower_suffix === '.png' || lower_suffix === '.gif' ||
+                lower_suffix === '.jpeg') {
+                    alert('上传图片正确')
+                }else {
+                    alert('上传图片错误')
+                }
+            }
+        }
+    </script>
+</body>
+</html>

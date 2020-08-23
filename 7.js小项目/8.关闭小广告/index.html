@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        #adimg {
+            width: 500px;
+            height: 200px;
+            position: relative;
+        }
+        #adimg #ad {
+            position: absolute;
+            right: 0;
+        }
+        #adimg #close {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 1px solid #e0e0e0;
+            text-align: center;
+            line-height: 20px;
+            cursor: pointer;
+            color: #666;
+        }
+    </style>
+    <title>关闭小广告</title>
+</head>
+<body>
+
+    <div id="adimg">
+        <img src="img/7.jpg" alt="" id="ad">
+        <span id="close">X</span>
+    </div>
+
+
+    <script> 
+        const closeSpan = document.getElementById('close')
+        const adimg = document.getElementById('adimg')
+        closeSpan.addEventListener('click', function() {
+            adimg.style.display = "none"
+        })
+    </script>
+</body>
+</html>

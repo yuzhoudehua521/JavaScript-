@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .right {
+            color: green;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+    <title>表单验证</title>
+</head>
+<body>
+
+    <div class="box">
+        <label for="score">您的成绩：</label>
+        <input type="text" placeholder="成绩是" id="score">
+        <span id="prompt">请输入您的成绩</span>
+    </div>
+    
+
+
+    <script>
+        function $(id) {
+            return typeof id === 'string' ? document.getElementById(id) : null
+        }
+
+        $('score').onblur = function() {
+            const value = parseInt(this.value)
+
+            if(isNaN(value)) {
+                //isNaN判断非数字
+                $('prompt').innerHTML = '输入的成绩格式不正确'
+                $('prompt').className = 'error'
+            }else if (value >= 0 && value <= 100) {
+                $('prompt').innerHTML = '输入的成绩正确'
+                $('prompt').className = 'right'
+            }else {
+                $('prompt').innerHTML = '输入的成绩超出范围'
+                $('prompt').className = 'error'
+            }
+        }
+
+        $('score').onfocus = function() {
+            $('prompt').innerHTML = '请输入您的成绩'
+            $('prompt').className = ''
+            $('score').value = ''
+        }
+    </script>
+</body>
+</html>
