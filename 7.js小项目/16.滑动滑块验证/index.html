@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .box{
+        position: relative;
+        width: 300px;
+        height: 34px;
+        background: #e8e8e8;
+        border-radius: 4px;
+        left: 20px;
+        }
+        .btn{
+        position: absolute;
+        top: 0;
+        width: 40px;
+        height:32px;
+        text-align: center;
+        line-height: 32px;
+        border-radius: 4px;
+        z-index: 3;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        color: black;
+        }
+        .text{
+        position: absolute;
+        width: 100%;
+        margin: 0;
+        text-align: center;
+        line-height: 34px;
+        display: block;
+        z-index: 2;
+        /*-webkit-margin-before: 1em;
+        -webkit-margin-after: 1em;*/
+        }
+        .bg{
+        position: absolute;
+        height: 100%;
+        background-color: yellowgreen;
+        z-index: 1;
+        }
+    </style>
+    <title>滑动滑块验证</title>
+</head>
+<body>
+
+    <div class="box">
+        <!--滑块-->
+        <a href="#" rel="external nofollow" ><div class="btn">>></div></a>
+        <!--文字-->
+        <p class="text">拖动滑块验证</p>
+        <!--背景-->
+        <div class="bg"></div> 
+    </div>
+
+
+    <script>
+        //原生写法
+        window.onload=function(){
+        var btn=document.querySelector(".btn");
+        var box=document.querySelector(".box");
+        var bg=document.querySelector(".bg");
+        var text=document.querySelector(".text");
+        //封装选择器
+        // function $(name){
+        // return document.querySelector(name);
+        // };
+        // var box=$(".box"),btn=$(".btn").....;
+        var flag=false;
+        //按下onmousedown 拖动onmousemove
+        //document.querySelector(".btn").onmousedown=function(event){//event事件状态
+        // var e=event||window.event;
+        //获取方法集合，可直接通过id, 类, 类型, 属性, 属性值等来选取元素（返回此名字的第一个）。
+        btn.onmousedown=function(e){//按下
+        var downX=e.clientX; //按下后对x轴的距离
+        //  console.log(downX);
+        //  alert("1");
+        
+        btn.onmousemove=function(e){//拖动
+        var moveX=e.clientX-downX; //拖动后与x轴距离减去初始值距离，移动值
+        // console.log(moveX);
+        
+        //移动范围
+        if(moveX>-2){
+        this.style.left=moveX+"px";//将移动值赋值给滑块
+        bg.style.width=moveX+"px";//背景
+        if(moveX>=(box.offsetWidth-btn.offsetWidth)){//包含原始宽度内边距边框，不包含外边框
+        //拖到头，验证成功
+        flag=true;
+        text.innerHTML="验证成功";
+        text.style.color="white";
+        //事件清除
+        btn.onmousedown=null;
+        btn.onmousemove=null;
+        }
+        }
+        }
+        }
+        
+        //松开按钮
+        btn.onmouseup=function(){ 
+        //事件清除
+        btn.onmousemove=null;
+        if(flag)return;
+        this.style.left=0;//将移动值赋值给滑块
+        bg.style.width=0;//背景
+        
+        }
+        }
+    </script>
+</body>
+</html>

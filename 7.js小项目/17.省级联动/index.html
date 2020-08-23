@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>省级联动</title>
+ <style>
+  div{
+   width: 200px;
+   float: left;
+   margin-left: 20px;
+  }
+  select{
+   width: 200px;
+  }
+ </style>
+</head>
+<body>
+ 
+    <div>
+        <select id="province" name="province">
+        <option value="">---请选择省---</option>
+        </select>
+    </div>
+    <div>
+        <select id="city" name="city">
+        <option value="">---请选择城市---</option>
+        </select>
+    </div>
+
+    <script>
+        //准备数据---
+        let data = [
+         {
+          p_name:"浙江省",
+          p_id:1,
+          citys:[
+           {
+            c_name:"杭州市",
+            c_id:100
+           },
+           {
+            c_name:"温州市",
+            c_id:101
+           },
+           {
+            c_name:"宁波市",
+            c_id:102
+           },
+           {
+            c_name:"嘉兴市",
+            c_id:103
+           },
+           {
+            c_name:"湖州市",
+            c_id:104
+           },
+           {
+            c_name:"绍兴市",
+            c_id:105
+           },
+           {
+            c_name:"金华市",
+            c_id:106
+           },
+          ]
+         },
+         {
+          p_name:"湖北省",
+          p_id:2,
+          citys:[
+           {
+            c_name:"武汉市",
+            c_id:200
+           },
+           {
+            c_name:"黄石市",
+            c_id:201
+           },
+           {
+            c_name:"十堰市",
+            c_id:202
+           },
+           {
+            c_name:"襄阳市",
+            c_id:204
+           },
+           {
+            c_name:"荆州市",
+            c_id:205
+           },
+           {
+            c_name:"黄冈市",
+            c_id:206
+           },
+          ]
+         },
+         {
+          p_name:"山东省",
+          p_id:3,
+          citys:[
+           {
+            c_name:"济南市",
+            c_id:300
+           },
+           {
+            c_name:"青岛市",
+            c_id:301
+           },
+           {
+            c_name:"淄博市",
+            c_id:302
+           },
+           {
+            c_name:"枣庄市",
+            c_id:303
+           },
+           {
+            c_name:"烟台市",
+            c_id:304
+           },
+           {
+            c_name:"日照市",
+            c_id:305
+           },
+          ]
+         }
+        ];
+       
+        // 加载所有的省份信息到一级的下拉列表中
+        let province = document.getElementById("province");
+        data.forEach((e,i)=>{
+         province.innerHTML += '<option value="'+e.p_id+'">'+e.p_name+'</option>'
+        });
+        
+        //给一级下拉列表绑定onchange事件
+        province.onchange = function(){
+         // this.value;//选择的省的id
+         // alert(this.value);
+         //根据省的id去找该省对应的市的信息
+       
+         data.forEach((e,i)=>{
+          if(e.p_id == this.value){
+           let citys = e.citys;
+           //将所有的市的信息填充到二级的下拉列表
+           let city = document.getElementById("city");
+       
+           //把之前的所有选项清掉
+           city.innerHTML = '<option value="">---请选择城市---</option>'
+           citys.forEach((ele,idx)=>{
+            //ele.c_name;//市的名称
+            // ele.c_id;//市的id
+            city.innerHTML += '<option value="'+ele.c_id+'">'+ele.c_name+'</option>'
+           });
+          }
+        });
+        }
+       
+       </script>
+</body>
+
+</html>

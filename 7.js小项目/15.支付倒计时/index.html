@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            background-color: #eee;
+            padding: 20px;
+            margin: 0 auto;
+        }
+        button {
+            margin: 30px 25px;
+        }
+    </style>
+    <title>支付倒计时</title>
+</head>
+<body>
+
+    <div>
+        <p>商品：黑暗悟空</p>
+        <p>价格：298</p>
+        <p>
+            <button>取消</button>
+            <button>支付</button>
+        </p>
+    </div>
+
+
+    <script>
+        document.getElementsByTagName('button')[1].onclick = function() {
+            let res = window.confirm('您确定要支付吗？')
+            if(res) {
+                location.href = './index1.html'
+            }
+        }
+    </script>
+</body>
+</html>

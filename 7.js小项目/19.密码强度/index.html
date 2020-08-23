@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+ <title>密码强度</title>
+ <style>
+    * {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+  }
+
+  .wrapper {
+   width: 500px;
+   height: 200px;
+   border: 1px solid #eee;
+   margin: 100px auto;
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+  }
+  .input_box{
+   width: 80%;
+   display: flex;
+   align-items: center;
+  }
+  .input_box input {
+   width: 82%;
+   height: 30px;
+   border: none;
+   outline: none;
+   border: 1px solid #D2B48C;
+   border-radius: 12px;
+   margin: 10px 0px;
+   padding-left: 15px;
+  }
+  .eye_icon{
+   width: 20px;
+   height: 20px;
+   background-image: url('./open_eye.png');
+   background-repeat: no-repeat;
+   background-position: center content;
+   background-size: cover;
+   margin-left: 10px;
+  }
+  .wrapper p {
+   width: 80%;
+   height: 60px;
+   line-height: 26px;
+   font-size: 14px;
+   color: #339999;
+  }
+
+  .pwdStrength {
+   width: 80%;
+   list-style: none;
+   height: 30px;
+   display: none;
+   flex: 1;
+  }
+
+  .weak,
+  .middle,
+  .strong {
+   height: 15px;
+   width: 30px;
+   border: 1px solid black;
+   background: rgb(238, 238, 238);
+
+  }
+
+  .middle {
+   border-left: 0;
+   border-right: 0;
+  }
+
+  .result {
+   width: 30px;
+   height: 15px;
+   font-size: 14px;
+   line-height: 14px;
+   text-align: center;
+   margin-left: 10px;
+  }
+ </style>
+</head>
+<body>
+
+  <div class="wrapper">
+    <div class="input_box">
+    <input type="password" name="" placeholder="请输入密码" oninput="passValidate(this)" id="inputPwd" value="">
+    <div class="eye_icon"></div>
+    </div>
+    <p>请至少使用字母、数字、符号两种类型组合的密码，长度为6~20位。</p>
+    <ul class="pwdStrength">
+     <li class="weak"></li>
+     <li class="middle"></li>
+     <li class="strong"></li>
+     <li class="result"></li>
+    </ul>
+  </div>
+
+
+    <script>
+      //密码的可见与隐藏、
+  console.log($('#inputPwd'))
+  var eyeFlag = false;
+  $('.eye_icon').click(function(){
+   if(!eyeFlag){
+    $(this).css({'background-image': 'url(' + "./close_eye.png" + ')'});
+    $('#inputPwd').attr('type','text');
+   }else{
+    $(this).css({'background-image': 'url(' + "./open_eye.png" + ')'});
+    $('#inputPwd').attr('type','password')
+   }
+   eyeFlag = !eyeFlag;
+  })
+  //密码强度验证
+  function passValidate(e) {
+   var pwd = $.trim(e.value);
+   if (pwd === '') {
+    $('.pwdStrength').css({'display':'none'})
+    $('.weak').css({
+     'background': 'rgb(238, 238, 238)'
+    });
+    $('.middle').css({
+     'background': 'rgb(238, 238, 238)'
+    });
+    $('.strong').css({
+     'background': 'rgb(238, 238, 238)'
+    });
+    $('.result').text('')
+   } else {
+    $('.pwdStrength').css({'display':'flex'})
+    //密码为八位及以上并且字母数字特殊字符三项都包括
+    var strongRegex = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g");
+    //密码为七位及以上并且字母、数字、特殊字符三项中有两项，强度是中等
+    var mediumRegex = new RegExp("^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
+    var enoughRegex = new RegExp("(?=.{6,}).*", "g");
+    if (false == enoughRegex.test(pwd)) {
+    } else if (strongRegex.test(pwd)) {
+     $('.strong').css({
+      'background': '#33ff33'
+     });
+     $('.result').text('强')
+    } else if (mediumRegex.test(pwd)) {
+
+     $('.middle').css({
+      'background': '#FFC125'
+     });
+     $('.strong').css({
+      'background': 'rgb(238, 238, 238)'
+     });
+     $('.result').text('中')
+    } else {
+
+     $('.weak').css({
+      'background': '#EE4000'
+     });
+     $('.middle').css({
+      'background': 'rgb(238, 238, 238)'
+     });
+     $('.strong').css({
+      'background': 'rgb(238, 238, 238)'
+     });
+     $('.result').text('弱')
+    }
+   }
+}
+    </script>
+     
+</body>
+
+</html>

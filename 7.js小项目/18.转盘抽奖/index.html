@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>转盘抽奖</title>
+ <style>
+  #fa {
+    width: 600px;
+    height: 600px;
+    border: 1px solid red;
+  }
+  #fa>div {
+    width: 33%;
+    height: 33%;
+    border: 1px solid red;
+    float: left;
+    line-height: 200px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+  }
+  #start {
+    cursor: pointer;
+    background-color: pink;
+  }
+ </style>
+</head>
+<body>
+
+    <div id="fa">
+      <div class="option">苍井空</div>
+      <div class="option">苍井空</div>
+      <div class="option">苍井空</div>
+      <div class="option">苍井空</div>
+      <div id="start">开始抽奖</div>
+      <div class="option">苍井空</div>
+      <div class="option">苍井空</div>
+      <div class="option">苍井空</div>
+      <div class="option">苍井空</div>
+    </div>
+ 
+
+    <script>
+      // 1.点击开始，触发一个定时器
+      let btn = document.getElementById('start')
+      let options = document.getElementsByClassName('option')
+      let timer = null
+
+      btn.onclick = function() {
+        let num = 0
+
+        if(timer === null) {
+            timer = setInterval(() => {
+              num++
+              // Math.round返回一个数字四舍五入后最接近的整数
+              let index = Math.round(Math.random()*(7-0) + 0)
+
+              for(let i = 0; i < options.length; i++) {
+                options[i].style.backgroundColor = '#fff'
+              }
+              options[index].style.backgroundColor = 'orange'
+
+              if(num>=10) {
+                clearInterval(timer)
+                timer=null
+              }
+          }, 100)
+        }
+        
+      }
+
+
+
+      // 2.定时器内部，生成一个随机数，对应所在元素
+      // 3.停止定时器
+    </script>
+</body>
+
+</html>

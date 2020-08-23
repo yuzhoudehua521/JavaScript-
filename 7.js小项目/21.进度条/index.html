@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>进度条</title>
+ <style>
+  .fa {
+    width: 400px;
+    margin-bottom: 30px;
+    border: 1px solid red;
+  }
+  .son {
+    width: 0;
+    height: 40px;
+    background-color: #f0f;
+    text-align: center;
+    line-height: 40px;
+  }
+ </style>
+</head>
+<body>
+
+  <div class="fa">
+    <div class="son">
+      <span>0</span><span>%</span>
+    </div>
+  </div>
+  <button id="btn">安装</button>
+ 
+
+    <script>
+      let btn = document.getElementById('btn')
+      let div = document.getElementsByTagName('div')
+      let span = document.getElementsByTagName('span')
+      let timer = null
+
+      btn.onclick = function() {
+        let num = 0
+        if(timer === null) {
+          timer = setInterval(() => {
+            num += 10
+            div[1].style.width = num + 'px'
+            span[0].innerHTML = Math.ceil(num/400*100)
+            if(num === 400) {
+              clearInterval(timer)
+            }
+          },100)
+        }
+        
+      }
+    </script>
+</body>
+
+</html>

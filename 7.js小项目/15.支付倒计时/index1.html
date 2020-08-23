@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        
+
+    </style>
+    <title>支付倒计时</title>
+</head>
+<body>
+
+    <div>
+        <h2>恭喜你，支付成功</h2>
+        <span id="jump">10</span>秒熟自动跳转首页
+        <p><button>立即返回</button></p>
+    </div>
+
+
+    <script>
+        window.onload = function() {
+            let timer = 10
+            setInterval(() => {
+                timer --
+                document.getElementById('jump').innerHTML = timer
+                if(timer === 0) {
+                    location.href = './index.html'
+                }
+            }, 1000)
+
+            document.getElementsByTagName('button')[0].onclick = function() {
+                location.href = './index.html'
+            }
+        }
+    </script>
+</body>
+</html>
