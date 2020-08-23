@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        div {
+            
+        }
+
+        img {
+
+            width: 400px;
+            height: 400px;
+        }
+    </style>
+    <title>图片切换</title>
+</head>
+<body>
+
+    <div>
+        <img src="img/0.jpg" id="sw">
+        <br>
+        <button id="prev">上一张</button>
+        <button id="next">下一张</button>
+    </div>
+    
+
+    <div>
+        <h2>图片隐藏</h2>
+        <button id="btn">隐藏</button>
+        <br>
+        <img src="img/26 - いくらうに - 妹紅[pid=83743168].png" id="new">
+    </div>
+    
+
+    <script>
+        const obtn = document.getElementById('btn')
+        // const nbtn = document.getElementById('new')
+        const nbtn = document.getElementsByTagName('img')[1]
+
+        obtn.onclick = function() {
+            if(obtn.innerHTML === '隐藏') {
+                nbtn.style.display = 'none'
+                obtn.innerHTML = '显示'
+            }else {
+                nbtn.style.display = 'block'
+                obtn.innerHTML = '隐藏'
+            }
+        }
+
+
+
+
+
+
+
+
+    </script>
+
+
+
+
+
+
+
+
+    <script src="main.js"></script>
+</body>
+</html>
