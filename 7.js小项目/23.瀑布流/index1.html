@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>等宽-定位布局</title>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <style type="text/css">
+        *{margin: 0; padding: 0;}
+        #main{
+            /* width: 1000px;
+            max-width: 1000px;*/
+            margin :0 auto;
+            position: relative;
+        }
+        .box{
+            float: left;
+            padding: 15px 0 0 15px;
+        }
+        .pic{
+            padding: 15px;
+            border:1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 5px #ccc;
+        }
+        .box img{
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="main">
+ 
+        <div class="box">
+            <div class="pic">
+                <img src="img/0.jpg">
+            </div>
+        </div>
+        <div class="box">
+          <div class="pic">
+              <img src="img/1.jpg">
+          </div>
+        </div>
+        <div class="box">
+          <div class="pic">
+              <img src="img/2.jpg">
+          </div>
+        </div>
+        <div class="box">
+          <div class="pic">
+              <img src="img/3.jpg">
+          </div>
+        </div>
+        <div class="box">
+          <div class="pic">
+              <img src="img/4.jpg">
+          </div>
+        </div>
+        <div class="box">
+          <div class="pic">
+              <img src="img/5.jpg">
+          </div>
+        </div>
+        <div class="box">
+          <div class="pic">
+              <img src="img/6.jpg">
+          </div>
+        </div>
+        <div class="box">
+          <div class="pic">
+              <img src="img/7.jpg">
+          </div>
+        </div>
+        <div class="box">
+          <div class="pic">
+              <img src="img/0.jpg">
+          </div>
+      </div>
+      <div class="box">
+        <div class="pic">
+            <img src="img/1.jpg">
+        </div>
+      </div>
+      <div class="box">
+        <div class="pic">
+            <img src="img/2.jpg">
+        </div>
+      </div>
+      <div class="box">
+        <div class="pic">
+            <img src="img/3.jpg">
+        </div>
+      </div>
+      <div class="box">
+        <div class="pic">
+            <img src="img/4.jpg">
+        </div>
+      </div>
+      <div class="box">
+        <div class="pic">
+            <img src="img/5.jpg">
+        </div>
+      </div>
+      <div class="box">
+        <div class="pic">
+            <img src="img/6.jpg">
+        </div>
+      </div>
+      <div class="box">
+        <div class="pic">
+            <img src="img/7.jpg">
+        </div>
+      </div>
+ 
+         
+    </div>
+
+    
+    <script type="text/javascript">
+
+        window.onload = function(){
+
+            waterfall('main','box');
+
+            //用于不断刷新图片
+            // dataImg = {
+            //     arr:[
+            //     {'src':'img/0.jpg'},
+            //     {'src':'img/1.jpg'},
+            //     {'src':'img/2.jpg'},
+            //     {'src':'img/3.jpg'},
+            //     {'src':'img/4.jpg'},
+            //     {'src':'img/5.jpg'},
+            //     {'src':'img/6.jpg'},
+            //     {'src':'img/7.jpg'}
+            //     ]
+            // }
+             
+            window.onscroll = function(){
+                //当滚动到最后一张图片高度一般时刷新新数据
+                var boxs = getClass('box');
+                var oneh2 = boxs[boxs.length-1].offsetTop;
+                var oneh = boxs[boxs.length-1].offsetHeight/2;
+                var top = document.body.scrollTop || document.documentElement.scrollTop;
+                var twoh = document.body.clientHeight||document.documentElement.clientHeight;
+ 
+                if(oneh2+oneh<top+twoh){
+                    for(var i=0;i<dataImg.arr.length;i++){
+                        var main = document.getElementById('main');
+                        var cdiv = document.createElement('div');
+                        cdiv.className = 'box';
+                        var cpic = document.createElement('div');
+                        cpic.className = 'pic';
+                        var cimg = document.createElement('img');
+                        cimg.src =  dataImg.arr[i].src;
+                        main.appendChild(cdiv);
+                        cdiv.appendChild(cpic);
+                        cpic.appendChild(cimg);
+                    }
+                }
+                waterfall('main','box');
+            }
+        }
+ 
+        function waterfall(parent,box){
+            //获取main元素
+            var oparent = document.getElementById(parent);
+ 
+            //获取所有 box 元素
+            var obox = getClass('box');
+ 
+            //获取每行能放多少个 居中摆放
+            var w = document.body.clientWidth||document.documentElement.clientWidth;
+            //var w =1000;
+            var oneWidth = obox[0].offsetWidth;
+            var num = Math.floor(w/oneWidth);
+            main.style.width = num*oneWidth+'px';
+ 
+            //瀑布流原理  left-下标*图片width top-上面图片高
+            var hrr = [];
+            for(var i=0;i<obox.length;i++){
+                if(i<num){
+                    hrr.push(obox[i].offsetHeight);
+                }else{
+                    var min = Math.min.apply(null,hrr);
+                    var index = getindex(hrr,min);
+                    obox[i].style.position = 'absolute';
+                    obox[i].style.left = index*oneWidth+'px';
+                    obox[i].style.top = min+'px';
+                    hrr[index] += obox[i].offsetHeight;
+                }
+            }
+            console.log(hrr);
+        }
+ 
+        //获取 数组内指定值的 序号
+        function getindex(hrr,h){
+            for(var i=0;i<hrr.length;i++){
+                if(hrr[i]==h){
+                    return i;
+                }
+            }
+        }
+ 
+        //统计所有指定class名称的元素
+        function getClass(a){
+            var doms = document.getElementsByTagName('*');
+            //var reg = '/^\b'+a+'\b$/';     \\->\    \b单词的分界处  只匹配a
+            var reg = new RegExp('\\b'+a+'\\b');          
+            var arr = [];
+            for(var i=0;i<doms.length;i++){
+                if(reg.test(doms[i].className)){
+                    arr.push(doms[i]);
+                }
+            }
+            return arr;
+        }
+ 
+    </script>
+</body>
+</html>
