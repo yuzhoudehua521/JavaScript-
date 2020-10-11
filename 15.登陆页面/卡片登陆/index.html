@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <title>卡片登陆</title>
+</head>
+
+<body>
+  
+
+  <div class="panel panel--static">
+    <div class="panel__content left">
+        <h1 class="panel__heading">Don't have an account?</h1>
+        <p class="panel__copy">Ethical celiac hashtag taxidermy squid. Wayfarers distillery narwhal, kombucha jean shorts selvage meggings.</p>
+        <button type="button" class="btn btn--secondary signup">Sign up</button>
+    </div>
+    <div class="panel__content right">
+        <h1 class="panel__heading">Have an account?</h1>
+        <p class="panel__copy">Ethical celiac hashtag taxidermy squid. Wayfarers distillery narwhal, kombucha jean shorts selvage meggings.</p>
+        <button type="button" class="btn btn--secondary login">Log in</button>
+    </div>
+    
+    <div class="panel panel--sliding">
+        <div class="panel__content signup">
+            <h1 class="panel__heading">Sign up</h1>
+            <form id="signup">
+                <input type="text" placeholder="Full name" class="input input--name">
+                <input type="text" placeholder="Email" class="input input--email">
+                <input type="text" placeholder="Password" class="input input--password">
+                <button class="btn btn--primary">Sign up</button>
+            </form>
+        </div>
+            
+            <div class="panel__content login">
+                <h1 class="panel__heading">Log in</h1>
+                <form id="login">
+                    <input type="text" placeholder="Email" class="input input--email">
+                    <input type="text" placeholder="Password" class="input input--password">
+                    <button class="btn btn--primary">Log in</button>
+                    <a href="/">Forgot password?</a>
+                </form>
+        </div>
+    </div>    
+</div>
+  
+
+
+  
+  <script>
+    (function() {
+    var staticPanel = $('.panel--static');
+    var slidingPanel = $('.panel--sliding');
+    
+    var signupBtn = staticPanel.find('.btn.signup');
+    var loginBtn = staticPanel.find('.btn.login');
+    
+    var signupContent = slidingPanel.find('.panel__content.signup');
+    var loginContent = slidingPanel.find('.panel__content.login');
+
+    signupBtn.on('click', function() {
+        loginContent.hide('fast');
+        signupContent.show('fast');
+        slidingPanel.animate({
+            'left': '4%'
+        }, 550, 'easeInOutBack');
+    });
+
+    loginBtn.on('click', function() {
+        signupContent.hide('fast');
+        loginContent.show('fast');
+        slidingPanel.animate({
+            'left': '54%'
+        }, 550, 'easeInOutBack');
+    });
+  })();
+  </script>
+</body>
+</html>

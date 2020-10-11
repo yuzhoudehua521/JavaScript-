@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    :root {
+      --back-color: red;     
+    }
+
+    #d1 {
+      width: 100px;
+      height: 100px;
+      background-color: var(--back-color);
+    }
+    #d2 {
+      width: 200px;
+      height: 200px;
+      background-color: var(--back-color);
+    }
+    #d3 {
+      width: 300px;
+      height: 300px;
+      background-color: var(--back-color);
+    }
+  </style>
+</head>
+<body>
+  
+  <div id="d1">你好</div>
+  <div id="d2">你好</div>
+  <div id="d3">你好</div>
+
+  <button>切换主题</button>
+
+  <script>
+    let btn = document.querySelector('button')
+
+    btn.onclick = function() {
+      //读取根样式
+      const rootStyle = getComputedStyle(document.documentElement)
+      const value = rootStyle.getPropertyValue('--back-color')
+
+      if(value === 'red') {
+        document.documentElement.style.setProperty('--back-color', 'green')
+      }else {
+        document.documentElement.style.setProperty('--back-color', 'red')
+      }
+    }
+  </script>
+</body>
+</html>

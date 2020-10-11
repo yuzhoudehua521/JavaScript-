@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      width: 1000px;
+      min-height: 200px;
+      border: solid 1px #ddd;
+      position: relative;
+    }
+    .move {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: solid 5px #000;
+      position: absolute;
+      left: 0;
+      top: 0;
+      overflow: hidden;
+      box-shadow: 0 0 20px #000;
+    }
+    .move img {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+    .hidden {
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="container">
+    <img src="./4.jpg" alt="" width="100%">
+    <div class="move">
+      <img src="./4.jpg" alt="">
+    </div>
+  </div>
+
+  <script>
+    //获取元素对象
+    const container = document.querySelector('.container')
+    const move = document.querySelector('.move')
+    const bigImg = document.querySelector('.move img')
+
+    container.addEventListener('mouseover', function() {
+      move.classList.remove('hidden')
+    })
+    container.addEventListener('mouseout', function() {
+      move.classList.add('hidden')
+    })
+
+    //移动圆圈
+    container.addEventListener('mousemove', function(e) {
+      //获取鼠标距离左侧偏移
+      let x = e.clientX
+
+      //获取container距离左侧偏移
+      let l = container.offsetLeft
+
+      //最终距离
+      let moveLeft = x - l - move.offsetWidth / 2
+
+      //边界检测
+      if(moveLeft <= 0) {
+        moveLeft = 0
+      }
+      let maxLeft = container.offsetWidth - move.offsetWidth
+      if(moveLeft >= maxLeft) {
+        moveLeft = maxLeft
+      }
+
+      //设置样式
+      move.style.left = moveLeft + 'px'
+
+      // 计算大图left值
+      let bigImgLeft = (moveLeft + move.offsetWidth/2) / container.offsetWidth * bigImg.offsetWidth - move.offsetWidth / 2
+
+      bigImg.style.left = - bigImgLeft + 'px'
+
+      //垂直方向
+      let y = e.clientY
+
+      let t = container.offsetTop
+
+      let moveTop = y - t - move.offsetHeight / 2
+
+      if(moveTop <= 0) {
+        moveTop = 0
+      }
+      let maxtop = container.offsetHeight - move.offsetHeight
+      if(moveTop >= maxtop) {
+        moveTop = maxtop
+      }
+
+      move.style.top = moveTop + 'px'
+
+      let bigImgTop = (moveTop + move.offsetHeight/2) / container.offsetHeight * bigImg.offsetHeight - move.offsetHeight / 2
+
+      bigImg.style.top = - bigImgTop + 'px'
+    })
+  </script>
+</body>
+</html>
